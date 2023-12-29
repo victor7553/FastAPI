@@ -25,13 +25,13 @@ cursos = {
 
 }
 
-# Busca todos os recursos
+# Busca todos os recursos#
 @app.get('/cursos')
 async def get_cursos():
   return cursos
 
 
-# Buscar um recurso especifico
+# Buscar um recurso especifico#
 @app.get('/cursos/{curso_id}')
 async def get_curso(curso_id: int):
   try:
@@ -40,7 +40,7 @@ async def get_curso(curso_id: int):
   except KeyError:
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='Curso não encontrado')
 
-# Criar um novo recurso
+# Criar um novo recurso#
 @app.post('/cursos', status_code=status.HTTP_201_CREATED)
 async def post_curso(curso: Curso):
   next_id: int = len(cursos) + 1
@@ -48,7 +48,7 @@ async def post_curso(curso: Curso):
   del curso.id 
   return curso
 
-# ataulizar um recurso existente
+# ataulizar um recurso existente#
 @app.put('/cursos/{curso_id}')
 async def put_curso(curso_id:int, curso: Curso):
   if curso_id in cursos:
