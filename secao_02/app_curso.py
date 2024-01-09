@@ -52,10 +52,10 @@ async def get_curso(curso_id: int = Path(title='ID do curso', description='Deve 
 
 # Criar um novo recurso #
 @app.post('/cursos', description='Adiciona um curso não existente.', summary='Cria um novo curso', status_code=status.HTTP_201_CREATED)
-async def post_curso(curso: Curso, db: Any = Depends(fake_db)):
+async def post_curso(curso: Curso):
   next_id: int = len(cursos) + 1
-  cursos[next_id] = curso
-  del curso.id 
+  curso.id = next_id
+  cursos.append(curso)
   return curso
 
 # ataulizar um recurso existente #
